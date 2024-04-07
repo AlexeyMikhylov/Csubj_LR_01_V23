@@ -92,10 +92,6 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 							printf("\b \b");
 						}
 
-						//userArray[i][j - 1] = '\0';
-						//printf("\b \b");
-						//j = j - 2;
-
 					}
 					else if (0 < j < 2)
 					{
