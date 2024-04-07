@@ -59,10 +59,11 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 					if (j >= 2) //если это не первый символ в строке
 					{
 						//если последний символ буква, а предпоследний символ пробел или таб, то счетчик слов -1
-						if ((strchr(Letters, userArray[i][j - 1]) != NULL) && (userArray[i][j - 2] == " "))
+						if ((strchr(Letters, userArray[i][j - 1]) != NULL) && (userArray[i][j - 2] == " " || userArray[i][j - 2] == "\t"))
 						{
 							userArray[i][j - 1] = '\0';
 							j = j - 2;
+
 							printf("\b \b");
 
 							if (wordCounter > 0)
@@ -74,16 +75,18 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 						{
 							userArray[i][j - 1] = '\0';
 							j = j - 2;
+
 							printf("\b \b");
 
 							if (wordCounter > 0)
 								wordCounter -= 1;
 
 						}
-						else if (userArray[i][j - 1] == '\t')
+						else if (userArray[i][j - 1] == '\t') //
 						{
 							printf("\b \b");
-							j--;
+							userArray[i][j] = '\0';
+							
 						}
 						else
 						{
