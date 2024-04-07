@@ -37,8 +37,16 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 			{
 				if (character != 8) //если нажат не enter, не escape и не backspace
 				{
-					userArray[i][j] = character;
-					fprintf(stdout, "%c", character);
+					if (character == 9)
+					{
+						userArray[i][j] = ' ';
+						fprintf(stdout, "%c", ' ');
+					}
+					else
+					{
+						userArray[i][j] = character;
+						fprintf(stdout, "%c", character);
+					}
 
 					if (j != 0) // если не первый элемент
 					{
@@ -58,42 +66,26 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 				{
 					if (j >= 2) //если это не первый символ в строке
 					{
-						//если последний символ буква, а предпоследний символ пробел или таб, то счетчик слов -1
-						if ((strchr(Letters, userArray[i][j - 1]) != NULL) && (userArray[i][j - 2] == " " || userArray[i][j - 2] == "\t"))
+						
+						if ((strchr(Letters, userArray[i][j - 1]) != NULL) && (userArray[i][j - 2] == " "))
 						{
-							userArray[i][j - 1] = '\0';
-							j = j - 2;
-
-							printf("\b \b");
 
 							if (wordCounter > 0)
 								wordCounter -= 1;
 
-
-						} //если последний символ пробел, а предпоследний буква, то счетик слов -1
+						}
 						else if ((userArray[i][j - 1] == ' ') && (strchr(Letters, userArray[i][j - 2]) != NULL))
 						{
-							userArray[i][j - 1] = '\0';
-							j = j - 2;
-
-							printf("\b \b");
 
 							if (wordCounter > 0)
 								wordCounter -= 1;
 
 						}
-						else if (userArray[i][j - 1] == '\t') //
-						{
-							printf("\b \b");
-							userArray[i][j] = '\0';
-							
-						}
-						else
-						{
-							userArray[i][j - 1] = '\0';
-							j = j - 2;
-							printf("\b \b");
-						}
+
+						userArray[i][j - 1] = '\0';
+						j = j - 2;
+
+						printf("\b \b");
 
 					}
 					else if (0 < j < 2)
@@ -104,7 +96,7 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 								wordCounter -= 1;
 						}
 
-						userArray[i][0] = ' '; //maybe not \0 but ' '; yeah ' ' is alright (at least it works)
+						userArray[i][0] = ' '; //пробел вместо '\0' чтобы строка вывелась
 
 						printf("\b \b");
 
