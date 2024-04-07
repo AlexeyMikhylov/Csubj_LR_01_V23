@@ -56,7 +56,7 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 				}
 				else //если нажат backspace
 				{
-					if (j >= 1) //если это не первый символ в строке
+					if (j >= 2) //если это не первый символ в строке
 					{
 						//если последний символ буква, а предпоследний символ пробел или таб, то счетчик слов -1
 						if ((strchr(Letters, userArray[i][j - 1]) != NULL) && (userArray[i][j - 2] == " " || userArray[i][j - 2] == "\t"))
@@ -75,6 +75,20 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 						printf("\b \b");
 
 						j = j - 2; // уменьшаем j на 2, предыдущий символ + нулевой символ
+					}
+					else if (0 < j < 2)
+					{
+						if ((strchr(Letters, userArray[i][0]) != NULL) && (userArray[i][1] == " " || userArray[i][1] == "\t"))
+						{
+							if (wordCounter > 0)
+								wordCounter -= 1;
+						}
+
+						userArray[i][0] = ' '; //maybe not \0 but ' '; yeah ' ' is alright (at least it works)
+
+						printf("\b \b");
+
+						j = 0;
 					}
 				}
 			}
