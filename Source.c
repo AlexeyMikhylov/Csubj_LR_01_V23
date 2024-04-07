@@ -88,7 +88,7 @@ int input(void) // rows <= 20; letters <= 128; 2 <=  words <= 20; enter -> next 
 
 						printf("\b \b");
 
-						j = 0;
+						j = 0; 
 					}
 				}
 			}
